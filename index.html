@@ -2,13 +2,70 @@
 <html>
 <head>
 	<title>Rakuten API testing</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="style.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 </head>
 <body>
 	<div class="content_wrapper">
-		<h2>楽天商品検索</h2>
-		<input type="text" id="serch_bar">
-		<button type="button" id="search_btn">Search</button>
+		<h2 id="main-title">み〜の晩ごはん</h2>
+		<!-- <input type="text" id="serch_bar">
+		<button type="button" id="search_btn">Search</button> -->
+		<div id="item_zone">
+		 <div class="container">
+		 	<div class="row">
+		 	  <div class="content"></div>
+		 	</div>
+		 </div>
+		</div>
+
+		<!-- let appId   = "1095910084106683101"; -->
+
 	</div>
+
+	<script>
+		const url ="https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?applicationId=1095910084106683101";
+
+		$.ajax({
+			url:url,
+			dataType:'json'
+		})
+		.then(function(data){
+			let html ='';
+			let categories = data.result.large;
+			console.log(data);
+		for(let i=0; i<categories.length; i++){
+			let category = categories[i];
+			
+			html+=
+			`	<div class="col">
+				  <a href=''><li class="list-group-item list-group-item-warning" ;">
+					 ${category.categoryName}
+				  </li>
+				</div>
+			`
+			;
+			
+			 
+			};
+			document.querySelector('.content').innerHTML = html;
+			
+		});
+		
+		
+			
+			
+
+
+
+		
+
+
+
+		
+		
+	</script>
 </body>
 </html>
